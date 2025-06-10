@@ -743,10 +743,10 @@ $avg_rating = number_format($wisata['avg_rating'] ?? 0, 1);
 
     <nav class="main-nav" id="mainNav">
         <ul class="nav-menu">
-            <li><a href="index.php">Home</a></li>
-            <li><a href="index.php#about">Tentang Kami</a></li>
-            <li><a href="wisata.php" class="active">Tempat Wisata</a></li>
-            <li><a href="index.php#events">Events</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="wisata.php">Tempat Wisata</a></li>
+                <li><a href="hotel.php">Hotel</a></li>
+                <li><a href="#about">Tentang Kami</a></li>
         </ul>
         <a href="login.php" class="login-btn">
             <i class="fas fa-sign-in-alt"></i>

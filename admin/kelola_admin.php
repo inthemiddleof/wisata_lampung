@@ -638,7 +638,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_admin'])) {
                 <i class="fas fa-user-shield"></i>
             </div>
             <span><?php echo htmlspecialchars($_SESSION['admin_name']); ?></span>
-            <a href="logout.php" class="logout-btn">
+            <a href="../logout.php" class="logout-btn">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
             </a>

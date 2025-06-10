@@ -1,30 +1,19 @@
 <?php
 require_once __DIR__ . '/admin/config/database.php';
 
-$popular_wisata = mysqli_query($conn,
-    "SELECT w.*, COUNT(u.id) as total_ulasan, AVG(u.rating) as avg_rating
-     FROM wisata w
-     LEFT JOIN ulasan u ON w.id = u.wisata_id
-     GROUP BY w.id
-     ORDER BY avg_rating DESC, total_ulasan DESC
-     LIMIT 12");
-
-
 // Get location filter from URL if exists
 $location_filter = isset($_GET['lokasi']) ? $_GET['lokasi'] : '';
 
 // Build the query with optional location filter
-$query = "SELECT w.*, COUNT(u.id) as total_ulasan, AVG(u.rating) as avg_rating
-          FROM wisata w
-          LEFT JOIN ulasan u ON w.id = u.wisata_id";
+$query = "SELECT * FROM hotel";
 
 if (!empty($location_filter)) {
-    $query .= " WHERE w.lokasi = '" . mysqli_real_escape_string($conn, $location_filter) . "'";
+    $query .= " WHERE lokasi = '" . mysqli_real_escape_string($conn, $location_filter) . "'";
 }
 
-$query .= " GROUP BY w.id
-            ORDER BY avg_rating DESC, total_ulasan DESC
-            LIMIT 12";
+$query .= " ORDER BY bintang DESC, harga ASC LIMIT 12";
+
+$hotels = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +21,7 @@ $query .= " GROUP BY w.id
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tempat Wisata - Wisata Lampung</title>
+    <title>Hotel - Wisata Lampung</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -63,7 +52,7 @@ $query .= " GROUP BY w.id
             overflow-x: hidden;
         }
 
-                .section-container {
+        .section-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
@@ -265,13 +254,13 @@ $query .= " GROUP BY w.id
             border-color: var(--primary);
         }
 
-        .wisata-grid {
+        .hotel-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
         }
 
-        .wisata-card {
+        .hotel-card {
             background: white;
             border-radius: 12px;
             overflow: hidden;
@@ -279,38 +268,38 @@ $query .= " GROUP BY w.id
             transition: all 0.3s ease;
         }
 
-        .wisata-card:hover {
+        .hotel-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .wisata-img {
+        .hotel-img {
             height: 200px;
             overflow: hidden;
         }
 
-        .wisata-img img {
+        .hotel-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: all 0.5s;
         }
 
-        .wisata-card:hover .wisata-img img {
+        .hotel-card:hover .hotel-img img {
             transform: scale(1.1);
         }
 
-        .wisata-info {
+        .hotel-info {
             padding: 1.5rem;
         }
 
-        .wisata-card h3 {
+        .hotel-card h3 {
             font-size: 1.2rem;
             margin-bottom: 10px;
             color: var(--dark);
         }
 
-        .wisata-meta {
+        .hotel-meta {
             display: flex;
             gap: 15px;
             margin-bottom: 15px;
@@ -318,12 +307,12 @@ $query .= " GROUP BY w.id
             color: var(--gray);
         }
 
-        .wisata-meta i {
+        .hotel-meta i {
             color: var(--primary);
             margin-right: 5px;
         }
 
-        .wisata-rating {
+        .hotel-rating {
             display: flex;
             align-items: center;
             gap: 10px;
@@ -334,12 +323,14 @@ $query .= " GROUP BY w.id
             color: var(--warning);
         }
 
-        .reviews {
-            font-size: 0.9rem;
-            color: var(--gray);
+        .hotel-price {
+            font-weight: 600;
+            color: var(--success);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
 
-        .wisata-desc {
+        .hotel-desc {
             color: var(--gray);
             font-size: 0.95rem;
             margin-bottom: 20px;
@@ -470,55 +461,55 @@ $query .= " GROUP BY w.id
 
         /* Responsive */
         @media (max-width: 768px) {    
-        .main-nav {
-            position: fixed;
-            top: 70px;
-            left: -100%;
-            width: 100%;
-            height: calc(100vh - 70px);
-            background-color: white;
-            flex-direction: column;
-            justify-content: flex-start;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .main-nav.active {
-            left: 0;
-        }
-        
-        .nav-menu {
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-        }
-        
-        .footer-container {
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-        
-        .footer-col {
-            text-align: center;
-        }
-        
-        .footer-col h3::after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .social-links {
-            justify-content: center;
-        }
-        
-        .footer-links a:hover {
-            transform: none;
-            padding-left: 5px;
-        }
+            .main-nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 2rem;
+                transition: all 0.3s ease;
             }
+            
+            .main-nav.active {
+                left: 0;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-col {
+                text-align: center;
+            }
+            
+            .footer-col h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .footer-links a:hover {
+                transform: none;
+                padding-left: 5px;
+            }
+        }
 
         @media (max-width: 576px) {
-            .wisata-grid {
+            .hotel-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -541,10 +532,10 @@ $query .= " GROUP BY w.id
 
     <nav class="main-nav" id="mainNav">
         <ul class="nav-menu">
-            <li><a href="index.php">Home</a></li>
-            <li><a href="wisata.php">Tempat Wisata</a></li>
-            <li><a href="hotel.php">Hotel</a></li>
-            <li><a href="#about">Tentang Kami</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="wisata.php">Tempat Wisata</a></li>
+                <li><a href="hotel.php">Hotel</a></li>
+                <li><a href="#about">Tentang Kami</a></li>
         </ul>
         <a href="login.php" class="login-btn">
             <i class="fas fa-sign-in-alt"></i>
@@ -554,31 +545,26 @@ $query .= " GROUP BY w.id
 </header>
 
     <main class="main-content">
-        <h1 class="section-title">Tempat Wisata di Lampung</h1>
+        <h1 class="section-title">Hotel di Lampung</h1>
         
         <div class="search-filter">
             <div class="search-box">
-                <input type="text" id="search-input" placeholder="Cari tempat wisata...">
+                <input type="text" id="search-input" placeholder="Cari hotel...">
                 <button type="button" id="search-btn"><i class="fas fa-search"></i></button>
             </div>
             <div class="filter-options">
-            <select id="location-filter">
-                <option value="">Semua Lokasi</option>
-                <option value="Lampung Selatan">Lampung Selatan</option>
-                <option value="Lampung Timur">Lampung Timur</option>
-                <option value="Lampung Barat">Lampung Barat</option>
-                <option value="Pesisir Barat">Pesisir Barat</option>
-                <option value="Pringsewu">Pringsewu</option>
-                <option value="Pesawaran">Pesawaran</option>
-                <option value="Bandar Lampung">Bandar Lampung</option>
-                <option value="Lampung Utara">Lampung Utara</option>
-            </select>
+                <select id="location-filter">
+                    <option value="">Semua Lokasi</option>
+                    <option value="Bandar Lampung">Bandar Lampung</option>
+                    <option value="Lampung Selatan">Lampung Selatan</option>
+                    <option value="Lampung Timur">Lampung Timur</option>
+                    <option value="Lampung Barat">Lampung Barat</option>
+                </select>
                 <select id="category-filter">
                     <option value="">Semua Kategori</option>
-                    <option value="Pantai">Pantai</option>
-                    <option value="Alam">Alam</option>
-                    <option value="Bukit">Bukit</option>
-                    <option value="Budaya">Budaya</option>
+                    <option value="Hotel">Hotel</option>
+                    <option value="Penginapan">Penginapan</option>
+                    <option value="Resort">Resort</option>
                 </select>
                 <select id="rating-filter">
                     <option value="">Semua Rating</option>
@@ -589,52 +575,55 @@ $query .= " GROUP BY w.id
             </div>
         </div>
         
-        <div class="wisata-grid" id="wisata-container">
-            <?php if (mysqli_num_rows($popular_wisata) > 0) { ?>
-                <?php while ($wisata = mysqli_fetch_assoc($popular_wisata)) { ?>
-                    <div class="wisata-card" 
-                         data-name="<?php echo strtolower(htmlspecialchars($wisata['nama'])); ?>"
-                         data-location="<?php echo htmlspecialchars($wisata['lokasi']); ?>"
-                         data-category="<?php echo htmlspecialchars($wisata['kategori']); ?>"
-                         data-rating="<?php echo round($wisata['avg_rating'] ?? 0); ?>">
+        <div class="hotel-grid" id="hotel-container">
+            <?php if (mysqli_num_rows($hotels) > 0) { ?>
+                <?php while ($hotel = mysqli_fetch_assoc($hotels)) { ?>
+                    <div class="hotel-card" 
+                         data-name="<?php echo strtolower(htmlspecialchars($hotel['nama'])); ?>"
+                         data-location="<?php echo htmlspecialchars($hotel['lokasi']); ?>"
+                         data-category="<?php echo htmlspecialchars($hotel['kategori']); ?>"
+                         data-rating="<?php echo $hotel['bintang']; ?>">
                         
-                        <div class="wisata-img">
-                            <img src="assets/uploads/<?php echo htmlspecialchars($wisata['gambar']); ?>" alt="<?php echo htmlspecialchars($wisata['nama']); ?>">
+                        <div class="hotel-img">
+                            <img src="assets/uploads/<?php echo htmlspecialchars($hotel['gambar']); ?>" alt="<?php echo htmlspecialchars($hotel['nama']); ?>">
                         </div>
                         
-                        <div class="wisata-info">
-                            <h3><?php echo htmlspecialchars($wisata['nama']); ?></h3>
+                        <div class="hotel-info">
+                            <h3><?php echo htmlspecialchars($hotel['nama']); ?></h3>
                             
-                            <div class="wisata-meta">
-                                <span><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($wisata['lokasi']); ?></span>
-                                <span><i class="fas fa-tag"></i> <?php echo htmlspecialchars($wisata['kategori']); ?></span>
+                            <div class="hotel-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($hotel['lokasi']); ?></span>
+                                <span><i class="fas fa-tag"></i> <?php echo htmlspecialchars($hotel['kategori']); ?></span>
                             </div>
                             
-                            <div class="wisata-rating">
+                            <div class="hotel-rating">
                                 <div class="stars">
                                     <?php
-                                    $rating = round($wisata['avg_rating'] ?? 0);
+                                    $rating = $hotel['bintang'];
                                     for ($i = 1; $i <= 5; $i++) {
                                         echo $i <= $rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
                                     }
                                     ?>
                                 </div>
-                                <span class="reviews">(<?php echo $wisata['total_ulasan'] ?? 0; ?> ulasan)</span>
                             </div>
                             
-                            <p class="wisata-desc"><?php echo htmlspecialchars(substr($wisata['deskripsi'], 0, 100)); ?>...</p>
+                            <div class="hotel-price">
+                                Rp <?php echo number_format($hotel['harga'], 0, ',', '.'); ?>/malam
+                            </div>
                             
-                            <a href="detail-wisata.php?id=<?php echo $wisata['id']; ?>" class="btn-detail">Lihat Detail</a>
+                            <p class="hotel-desc"><?php echo htmlspecialchars(substr($hotel['deskripsi'], 0, 100)); ?>...</p>
+                            
+                            <a href="detail-hotel.php?id=<?php echo $hotel['id']; ?>" class="btn-detail">Lihat Detail</a>
                         </div>
                     </div>
                 <?php } ?>
             <?php } else { ?>
-                <p class="no-results">Tidak ada data wisata</p>
+                <p class="no-results">Tidak ada data hotel</p>
             <?php } ?>
         </div>
         
         <div class="no-results" id="no-results-message" style="display: none;">
-            Tidak ditemukan tempat wisata yang sesuai dengan kriteria pencarian.
+            Tidak ditemukan hotel yang sesuai dengan kriteria pencarian.
         </div>
     </main>
 
@@ -656,7 +645,7 @@ $query .= " GROUP BY w.id
                 <li><a href="index.php">Home</a></li>
                 <li><a href="index.php#about">Tentang Kami</a></li>
                 <li><a href="wisata.php">Tempat Wisata</a></li>
-                <li><a href="index.php#events">Events</a></li>
+                <li><a href="hotel.php">Hotel</a></li>
             </ul>
         </div>
         <div class="footer-col">
@@ -678,13 +667,13 @@ $query .= " GROUP BY w.id
             const locationFilter = document.getElementById('location-filter');
             const categoryFilter = document.getElementById('category-filter');
             const ratingFilter = document.getElementById('rating-filter');
-            const wisataContainer = document.getElementById('wisata-container');
-            const wisataCards = document.querySelectorAll('.wisata-card');
+            const hotelContainer = document.getElementById('hotel-container');
+            const hotelCards = document.querySelectorAll('.hotel-card');
             const noResultsMessage = document.getElementById('no-results-message');
             const urlParams = new URLSearchParams(window.location.search);
             const locationParam = urlParams.get('lokasi');
         
-            function filterWisata() {
+            function filterHotels() {
                 const searchTerm = searchInput.value.toLowerCase();
                 const locationValue = locationFilter.value;
                 const categoryValue = categoryFilter.value;
@@ -692,7 +681,7 @@ $query .= " GROUP BY w.id
                 
                 let visibleCount = 0;
                 
-                wisataCards.forEach(card => {
+                hotelCards.forEach(card => {
                     const name = card.dataset.name;
                     const location = card.dataset.location;
                     const category = card.dataset.category;
@@ -718,11 +707,11 @@ $query .= " GROUP BY w.id
                 }
             }
             
-            searchInput.addEventListener('input', filterWisata);
-            searchBtn.addEventListener('click', filterWisata);
-            locationFilter.addEventListener('change', filterWisata);
-            categoryFilter.addEventListener('change', filterWisata);
-            ratingFilter.addEventListener('change', filterWisata);
+            searchInput.addEventListener('input', filterHotels);
+            searchBtn.addEventListener('click', filterHotels);
+            locationFilter.addEventListener('change', filterHotels);
+            categoryFilter.addEventListener('change', filterHotels);
+            ratingFilter.addEventListener('change', filterHotels);
             
             document.getElementById('mobileMenuBtn').addEventListener('click', function() {
                 document.getElementById('mainNav').classList.toggle('active');
@@ -757,19 +746,19 @@ $query .= " GROUP BY w.id
             
             // Get location from URL parameter if exists              
             if (locationParam) {
-                    // Set the location filter dropdown
-                    locationFilter.value = locationParam;
-                    
-                    // Scroll to the wisata section
-                    setTimeout(() => {
-                        window.scrollTo({
-                            top: document.querySelector('.main-content').offsetTop - 80,
-                            behavior: 'smooth'
-                        });
+                // Set the location filter dropdown
+                locationFilter.value = locationParam;
+                
+                // Scroll to the hotel section
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: document.querySelector('.main-content').offsetTop - 80,
+                        behavior: 'smooth'
+                    });
                 }, 100);
             }
 
-            filterWisata();
+            filterHotels();
         });
     </script>
 </body>

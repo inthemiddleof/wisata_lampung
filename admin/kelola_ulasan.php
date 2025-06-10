@@ -299,7 +299,7 @@ if (isset($_GET['hapus'])) {
                 <i class="fas fa-user"></i>
             </div>
             <span><?php echo htmlspecialchars($_SESSION['admin_name']); ?></span>
-            <a href="logout.php" class="logout-btn">
+            <a href="../logout.php" class="logout-btn">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
             </a>

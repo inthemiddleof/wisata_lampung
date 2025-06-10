@@ -159,8 +159,8 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
         }
 
         .jumbotron {
-            height: 90vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/base/kiluan.jpg') no-repeat center center;
+            height: 95vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/base/siger.jpg') no-repeat center center;
             background-size: cover;
             display: flex;
             align-items: center;
@@ -208,8 +208,8 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
 
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
-            margin-top: 2rem;
+            /* margin-bottom: 3rem;
+            margin-top: 2rem; */
             position: relative;
         }
 
@@ -237,11 +237,11 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
         }
 
 
-        .products-section {
+        .lokasi-section {
             padding: 3rem 2rem;
             background-color: white;
             max-width: 1200px;
-            margin: 4rem auto;
+            margin: 0 auto;
         }
 
         .section-title {
@@ -250,16 +250,16 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
         }
 
         .section-title h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--dark);
-            position: relative;
-            display: inline-block;
+            margin-bottom: 0.5rem;
+            /* position: relative; */
+            /* display: inline-block; */
         }
 
         .section-title h2::after {
             content: '';
             position: absolute;
-            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
             width: 80px;
@@ -274,7 +274,7 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
             margin: 1rem auto 0;
         }
 
-        .products-grid {
+        .lokasi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 25px;
@@ -283,7 +283,7 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
             padding: 0 20px;
         }
 
-        .product-card {
+        .lokasi-card {
             position: relative;
             border-radius: 12px;
             overflow: hidden;
@@ -293,14 +293,14 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
             cursor: pointer;
         }
 
-        .product-card img {
+        .lokasi-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
 
-        .product-overlay {
+        .lokasi-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -311,35 +311,35 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
             transition: all 0.3s ease;
         }
 
-        .product-overlay p {
+        .lokasi-overlay p {
             font-size: 0.9rem;
             opacity: 0.9;
             margin: 0;
             transition: all 0.3s ease;
         }
 
-        .product-card:hover {
+        .lokasi-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .product-card:hover img {
+        .lokasi-card:hover img {
             transform: scale(1.1);
         }
 
-        .product-card:hover .product-overlay {
+        .lokasi-card:hover .product-overlay {
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             padding-bottom: 2rem;
         }
 
-        .product-card:hover .product-overlay p {
+        .lokasi-card:hover .product-overlay p {
             opacity: 1;
             transform: translateY(-5px);
         }
 
 
         
-        .produk-section {
+        /* .produk-section {
             padding: 3rem 2rem;
             background-color: white;
             max-width: 1200px;
@@ -357,9 +357,9 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
             margin-bottom: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
+        } */
 
-        .produk-section .section-header p {
+        /* .produk-section .section-header p {
             color: var(--gray);
             font-size: 1rem;
         }
@@ -410,12 +410,13 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
             font-size: 1rem;
             font-weight: 500;
             color: var(--dark);
-        }
+        } */
 
         .wisata-section {
-            /* padding: 2rem 0; */
+            padding: 4rem 0;
             background-color: #fff;
-            margin: 4rem 0;
+            /* margin: 4rem 0; */
+            background-color: var(--primary-light);
         }
 
         .wisata-section .section-title {
@@ -556,7 +557,7 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
             padding: 2rem 0;
         }
 
-        .events-section {
+        /* .events-section {
             padding: 2rem 0;
             background-color: var(--primary-light);
         }
@@ -667,7 +668,7 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
         .event-btn:hover {
             background-color: var(--primary);
             color: white;
-        }
+        } */
 
                 /* Footer */
         .main-footer {
@@ -923,9 +924,9 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
         <nav class="main-nav" id="mainNav">
             <ul class="nav-menu">
                 <li><a href="index.php">Home</a></li>
-                <li><a href="#about">Tentang Kami</a></li>
                 <li><a href="wisata.php">Tempat Wisata</a></li>
-                <li><a href="#events">Events</a></li>
+                <li><a href="hotel.php">Hotel</a></li>
+                <li><a href="#about">Tentang Kami</a></li>
             </ul>
             <a href="login.php" class="login-btn">
                 <i class="fas fa-sign-in-alt"></i>
@@ -938,55 +939,66 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
             <div class="jumbotron-content">
                 <h1>Explore Keindahan Wisata Lampung</h1>
                 <p>Temukan pengalaman tak terlupakan dengan berbagai destinasi wisata menarik di Provinsi Lampung</p>
-                <a href="#wisata" class="explore-btn">Jelajahi Sekarang</a>
+                <a href="wisata.php" class="explore-btn">Jelajahi Sekarang</a>
             </div>
         </section>
 
-        <main class="main-content">
-
-    <section id="products" class="products-section">
-        <div class="section-title">
-            <h2>Mau Kemana Kita Hari Ini?</h2>
-            <p>Beberapa provinsi berikut memiliki keindahan dan keunikan yang tidak bisa dilupakan</p>
-        </div>
-
-        <div class="products-grid">
-            <div class="product-card" onclick="window.location.href='wisata.php?lokasi=Lampung Selatan'">
-                <img src="assets/base/lampung-selatan.jpeg" alt="Lampung Selatan">
-                <div class="product-overlay">
-                    <p>Lampung Selatan</p>
-                </div>
-            </div>
-
-            <div class="product-card" onclick="window.location.href='wisata.php?lokasi=Lampung Timur'">
-                <img src="assets/base/lampung-timur.jpg" alt="Lampung Timur">
-                <div class="product-overlay">
-                    <p>Lampung Timur</p>
-                </div>
-            </div>
-            
-            <div class="product-card" onclick="window.location.href='wisata.php?lokasi=Lampung Barat'">
-                <img src="assets/base/lampung-barat.jpg" alt="Lampung Barat">
-                <div class="product-overlay">
-                    <p>Lampung Barat</p>
-                </div>
-            </div>
-            
-            <div class="product-card" onclick="window.location.href='wisata.php?lokasi=Pesisir Barat'">
-                <img src="assets/base/pesisir-barat.jpg" alt="Pesisir Barat">
-                <div class="product-overlay">
-                    <p>Pesisir Barat</p>
-                </div>
-            </div>
-
-            <div class="product-card" onclick="window.location.href='wisata.php?lokasi=Pesawaran'">
-                <img src="assets/base/pesawaran.jpg" alt="Pesawaran">
-                <div class="product-overlay">
-                    <p>Pesawaran</p>
-                </div>
+    <section id="lokasi" class="lokasi-section">
+    <div class="section-title">
+        <h2>Mau Kemana Kita Hari Ini?</h2>
+        <p>Beberapa provinsi berikut memiliki keindahan dan keunikan yang tidak bisa dilupakan</p>
+    </div>
+    <div class="lokasi-grid">
+        <div class="lokasi-card" onclick="filterByLocation('Lampung Selatan')">
+            <img src="assets/base/lampung-selatan.jpeg" alt="Lampung Selatan">
+            <div class="lokasi-overlay">
+                <p>Lampung Selatan</p>
             </div>
         </div>
-    </section>
+        <div class="lokasi-card" onclick="filterByLocation('Lampung Timur')">
+            <img src="assets/base/lampung-timur.jpg" alt="Lampung Timur">
+            <div class="lokasi-overlay">
+                <p>Lampung Timur</p>
+            </div>
+        </div>
+        <div class="lokasi-card" onclick="filterByLocation('Lampung Barat')">
+            <img src="assets/base/lampung-barat.jpg" alt="Lampung Barat">
+            <div class="lokasi-overlay">
+                <p>Lampung Barat</p>
+            </div>
+        </div>
+        <div class="lokasi-card" onclick="filterByLocation('Pesisir Barat')">
+            <img src="assets/base/pesisir-barat.jpg" alt="Pesisir Barat">
+            <div class="lokasi-overlay">
+                <p>Pesisir Barat</p>
+            </div>
+        </div>
+        <div class="lokasi-card" onclick="filterByLocation('Pringsewu')">
+            <img src="assets/base/pringsewu.jpg" alt="Pringsewu">
+            <div class="lokasi-overlay">
+                <p>Pringsewu</p>
+            </div>
+        </div>
+        <div class="lokasi-card" onclick="filterByLocation('Pesawaran')">
+            <img src="assets/base/pesawaran.jpg" alt="Pesawaran">
+            <div class="lokasi-overlay">
+                <p>Pesawaran</p>
+            </div>
+        </div>
+        <div class="lokasi-card" onclick="filterByLocation('Bandar Lampung')">
+            <img src="assets/base/bandar-lampung.jpg" alt="Bandar Lampung">
+            <div class="lokasi-overlay">
+                <p>Bandar Lampung</p>
+            </div>
+        </div>
+        <div class="lokasi-card" onclick="filterByLocation('Lampung Utara')">
+            <img src="assets/base/lampung-utara.jpg" alt="Lampung Utara">
+            <div class="lokasi-overlay">
+                <p>Lampung Utara</p>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 <section id="wisata" class="wisata-section">
@@ -1032,7 +1044,7 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
 </section>
 
 
-<section id="events" class="events-section">
+<!-- <section id="events" class="events-section">
     <div class="section-container">
         <div class="section-title">
             <h2>Event Terdekat</h2>
@@ -1094,7 +1106,7 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <footer class="main-footer">
     <div class="footer-container">
@@ -1129,12 +1141,87 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
     </div>
 </footer>
 
-    <script>
-    window.addEventListener('DOMContentLoaded', function() {
-        const urlParams = new URLSearchParams(window.location.hash.substring(1));
-        const kategori = urlParams.get('kategori');
+<script>
+    // window.addEventListener('DOMContentLoaded', function() {
+    //     const urlParams = new URLSearchParams(window.location.hash.substring(1));
+    //     const kategori = urlParams.get('kategori');
         
-        if (kategori) {
+    //     if (kategori) {
+    //         const wisataSection = document.getElementById('wisata');
+    //         if (wisataSection) {
+    //             setTimeout(() => {
+    //                 window.scrollTo({
+    //                     top: wisataSection.offsetTop - 80,
+    //                     behavior: 'smooth'
+    //                 });
+    //             }, 100);
+                
+    //             const semuaWisata = document.querySelectorAll('.wisata-card');
+    //             semuaWisata.forEach(wisata => {
+    //                 const lokasi = wisata.querySelector('.wisata-location span').textContent;
+    //                 const kategoriWisata = wisata.dataset.kategori || '';
+                    
+    //                 if (kategori === 'Pantai' && lokasi.includes('Lampung Selatan')) {
+    //                     wisata.style.display = 'block';
+    //                 } else if (kategori === 'Alam' && lokasi.includes('Lampung Timur')) {
+    //                     wisata.style.display = 'block';
+    //                 } else if (kategori === 'Bukit' && lokasi.includes('Bandar Lampung')) {
+    //                     wisata.style.display = 'block';
+    //                 } else if (kategori === 'Budaya' && lokasi.includes('Lampung Utara')) {
+    //                     wisata.style.display = 'block';
+    //                 } else {
+    //                     wisata.style.display = 'none';
+    //                 }
+    //             });
+    //         }
+    //     }
+    // });
+
+    //     document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+    //         document.getElementById('mainNav').classList.toggle('active');
+    //     });
+
+    //     window.addEventListener('scroll', function() {
+    //         if (window.scrollY > 10) {
+    //             document.getElementById('mainHeader').classList.add('scrolled');
+    //         } else {
+    //             document.getElementById('mainHeader').classList.remove('scrolled');
+    //         }
+    //     });
+
+    //     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    //         anchor.addEventListener('click', function(e) {
+    //             e.preventDefault();
+                
+    //             const targetId = this.getAttribute('href');
+    //             if (targetId === '#') return;
+                
+    //             const targetElement = document.querySelector(targetId);
+    //             if (targetElement) {
+    //                 window.scrollTo({
+    //                     top: targetElement.offsetTop - 80,
+    //                     behavior: 'smooth'
+    //                 });
+                    
+    //                 document.getElementById('mainNav').classList.remove('active');
+    //             }
+    //         });
+    //     });
+
+    // Function to filter by location
+// Change the existing filterByLocation function to this:
+function filterByLocation(location) {
+    // Redirect to wisata.php with location parameter
+    window.location.href = 'wisata.php?lokasi=' + encodeURIComponent(location);
+}
+
+    // Function to apply filter when page loads with location parameter
+    function applyLocationFilter() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const location = urlParams.get('lokasi');
+        
+        if (location) {
+            // Scroll to wisata section
             const wisataSection = document.getElementById('wisata');
             if (wisataSection) {
                 setTimeout(() => {
@@ -1143,44 +1230,53 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
                         behavior: 'smooth'
                     });
                 }, 100);
-                
-                const semuaWisata = document.querySelectorAll('.wisata-card');
-                semuaWisata.forEach(wisata => {
-                    const lokasi = wisata.querySelector('.wisata-location span').textContent;
-                    const kategoriWisata = wisata.dataset.kategori || '';
-                    
-                    if (kategori === 'Pantai' && lokasi.includes('Lampung Selatan')) {
-                        wisata.style.display = 'block';
-                    } else if (kategori === 'Alam' && lokasi.includes('Lampung Timur')) {
-                        wisata.style.display = 'block';
-                    } else if (kategori === 'Bukit' && lokasi.includes('Bandar Lampung')) {
-                        wisata.style.display = 'block';
-                    } else if (kategori === 'Budaya' && lokasi.includes('Lampung Utara')) {
-                        wisata.style.display = 'block';
-                    } else {
-                        wisata.style.display = 'none';
-                    }
-                });
+            }
+            
+            // Filter wisata cards by location
+            const semuaWisata = document.querySelectorAll('.wisata-card');
+            semuaWisata.forEach(wisata => {
+                const wisataLocation = wisata.dataset.location || '';
+                if (wisataLocation.includes(location)) {
+                    wisata.style.display = 'block';
+                } else {
+                    wisata.style.display = 'none';
+                }
+            });
+            
+            // Update filter status
+            const filterStatus = document.getElementById('filter-status');
+            if (filterStatus) {
+                filterStatus.textContent = `Menampilkan wisata di: ${location}`;
+                filterStatus.style.display = 'block';
             }
         }
-    });
+    }
 
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+    // Apply filter when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        applyLocationFilter();
+        
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn')?.addEventListener('click', function() {
             document.getElementById('mainNav').classList.toggle('active');
         });
 
+        // Header scroll effect
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 10) {
-                document.getElementById('mainHeader').classList.add('scrolled');
-            } else {
-                document.getElementById('mainHeader').classList.remove('scrolled');
+            const header = document.getElementById('mainHeader');
+            if (header) {
+                if (window.scrollY > 10) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
             }
         });
 
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
                 
@@ -1191,10 +1287,13 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
                         behavior: 'smooth'
                     });
                     
-                    document.getElementById('mainNav').classList.remove('active');
+                    // Close mobile menu if open
+                    const nav = document.getElementById('mainNav');
+                    if (nav) nav.classList.remove('active');
                 }
             });
         });
-    </script>
+    });
+</script>
 </body>
 </html>
