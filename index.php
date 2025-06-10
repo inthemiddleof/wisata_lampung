@@ -9,7 +9,6 @@ $popular_wisata = mysqli_query($conn,
      ORDER BY total_ulasan DESC, avg_rating DESC
      LIMIT 3");
 
-
 $upcoming_events = []; // Akan diisi dengan query ke tabel events jika ada
 
 $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
@@ -336,81 +335,6 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
             opacity: 1;
             transform: translateY(-5px);
         }
-
-
-        
-        /* .produk-section {
-            padding: 3rem 2rem;
-            background-color: white;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .produk-section .section-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .produk-section .section-header h2 {
-            font-size: 1.8rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        } */
-
-        /* .produk-section .section-header p {
-            color: var(--gray);
-            font-size: 1rem;
-        }
-
-        .produk-grid {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .produk-kolom {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            min-width: 200px;
-        }
-
-        .produk-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px 20px;
-            background-color: var(--primary-light);
-            border-radius: 8px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .produk-item:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .produk-item:hover i,
-        .produk-item:hover span {
-            color: white;
-        }
-
-        .produk-item i {
-            font-size: 1.5rem;
-            color: var(--primary);
-            width: 30px;
-            text-align: center;
-        }
-
-        .produk-item span {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--dark);
-        } */
 
         .wisata-section {
             padding: 4rem 0;
@@ -1142,86 +1066,15 @@ $categories = mysqli_query($conn, "SELECT DISTINCT kategori FROM wisata");
 </footer>
 
 <script>
-    // window.addEventListener('DOMContentLoaded', function() {
-    //     const urlParams = new URLSearchParams(window.location.hash.substring(1));
-    //     const kategori = urlParams.get('kategori');
-        
-    //     if (kategori) {
-    //         const wisataSection = document.getElementById('wisata');
-    //         if (wisataSection) {
-    //             setTimeout(() => {
-    //                 window.scrollTo({
-    //                     top: wisataSection.offsetTop - 80,
-    //                     behavior: 'smooth'
-    //                 });
-    //             }, 100);
-                
-    //             const semuaWisata = document.querySelectorAll('.wisata-card');
-    //             semuaWisata.forEach(wisata => {
-    //                 const lokasi = wisata.querySelector('.wisata-location span').textContent;
-    //                 const kategoriWisata = wisata.dataset.kategori || '';
-                    
-    //                 if (kategori === 'Pantai' && lokasi.includes('Lampung Selatan')) {
-    //                     wisata.style.display = 'block';
-    //                 } else if (kategori === 'Alam' && lokasi.includes('Lampung Timur')) {
-    //                     wisata.style.display = 'block';
-    //                 } else if (kategori === 'Bukit' && lokasi.includes('Bandar Lampung')) {
-    //                     wisata.style.display = 'block';
-    //                 } else if (kategori === 'Budaya' && lokasi.includes('Lampung Utara')) {
-    //                     wisata.style.display = 'block';
-    //                 } else {
-    //                     wisata.style.display = 'none';
-    //                 }
-    //             });
-    //         }
-    //     }
-    // });
-
-    //     document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-    //         document.getElementById('mainNav').classList.toggle('active');
-    //     });
-
-    //     window.addEventListener('scroll', function() {
-    //         if (window.scrollY > 10) {
-    //             document.getElementById('mainHeader').classList.add('scrolled');
-    //         } else {
-    //             document.getElementById('mainHeader').classList.remove('scrolled');
-    //         }
-    //     });
-
-    //     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    //         anchor.addEventListener('click', function(e) {
-    //             e.preventDefault();
-                
-    //             const targetId = this.getAttribute('href');
-    //             if (targetId === '#') return;
-                
-    //             const targetElement = document.querySelector(targetId);
-    //             if (targetElement) {
-    //                 window.scrollTo({
-    //                     top: targetElement.offsetTop - 80,
-    //                     behavior: 'smooth'
-    //                 });
-                    
-    //                 document.getElementById('mainNav').classList.remove('active');
-    //             }
-    //         });
-    //     });
-
-    // Function to filter by location
-// Change the existing filterByLocation function to this:
 function filterByLocation(location) {
-    // Redirect to wisata.php with location parameter
     window.location.href = 'wisata.php?lokasi=' + encodeURIComponent(location);
 }
 
-    // Function to apply filter when page loads with location parameter
     function applyLocationFilter() {
         const urlParams = new URLSearchParams(window.location.search);
         const location = urlParams.get('lokasi');
         
         if (location) {
-            // Scroll to wisata section
             const wisataSection = document.getElementById('wisata');
             if (wisataSection) {
                 setTimeout(() => {
@@ -1232,7 +1085,6 @@ function filterByLocation(location) {
                 }, 100);
             }
             
-            // Filter wisata cards by location
             const semuaWisata = document.querySelectorAll('.wisata-card');
             semuaWisata.forEach(wisata => {
                 const wisataLocation = wisata.dataset.location || '';
@@ -1243,7 +1095,6 @@ function filterByLocation(location) {
                 }
             });
             
-            // Update filter status
             const filterStatus = document.getElementById('filter-status');
             if (filterStatus) {
                 filterStatus.textContent = `Menampilkan wisata di: ${location}`;
@@ -1252,16 +1103,13 @@ function filterByLocation(location) {
         }
     }
 
-    // Apply filter when page loads
     document.addEventListener('DOMContentLoaded', function() {
         applyLocationFilter();
         
-        // Mobile menu toggle
         document.getElementById('mobileMenuBtn')?.addEventListener('click', function() {
             document.getElementById('mainNav').classList.toggle('active');
         });
 
-        // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('mainHeader');
             if (header) {
@@ -1273,21 +1121,17 @@ function filterByLocation(location) {
             }
         });
 
-        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
-                
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    
-                    // Close mobile menu if open
                     const nav = document.getElementById('mainNav');
                     if (nav) nav.classList.remove('active');
                 }

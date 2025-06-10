@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin - Wisata Lampung</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #4361ee;
@@ -35,6 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             --dark: #1f2937;
             --light: #f9fafb;
             --accent: #f72585;
+        }
+
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -46,6 +53,108 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             min-height: 100vh;
             margin: 0;
         }
+
+        .main-header {
+            background-color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            padding: 0.7rem 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .main-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .main-brand i {
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-menu a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .login-btn {
+            color: white;
+            background-color: var(--primary);
+            border: none;
+            border-radius: 6px;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .login-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
 
         .login-container {
             background: white;
@@ -98,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
         }
 
-        .login-btn {
+        .login-btn2 {
             width: 100%;
             padding: 0.75rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -111,7 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transition: all 0.3s ease;
         }
 
-        .login-btn:hover {
+        .login-btn2:hover {
             background: linear-gradient(135deg, #3a56d4, #3830b8);
             transform: translateY(-2px);
         }
@@ -124,10 +233,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
+    <header class="main-header" id="mainHeader">
+        <a href="index.php" class="main-brand">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>Wisata Lampung</span>
+        </a>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <nav class="main-nav" id="mainNav">
+            <ul class="nav-menu">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="wisata.php">Tempat Wisata</a></li>
+                <li><a href="hotel.php">Hotel</a></li>
+                <li><a href="#about">Tentang Kami</a></li>
+            </ul>
+            <a href="login.php" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Login</span>
+            </a>
+        </nav>
+    </header>
+
     <div class="login-container">
         <div class="login-header">
             <h1><i class="fas fa-map-marked-alt"></i> Wisata Lampung</h1>
-            <p>Panel Admin - Silakan masuk</p>
+            <p>Panel Login - Silakan masuk</p>
         </div>
 
         <?php if (isset($error)): ?>
@@ -143,7 +276,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit" class="login-btn">Masuk</button>
+            <button type="submit" class="login-btn2">Masuk</button>
         </form>
     </div>
 </body>
